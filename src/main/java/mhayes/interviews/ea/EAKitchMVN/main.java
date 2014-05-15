@@ -30,7 +30,7 @@ public class main {
 		hand_two.add(new Card(Card.Suit.CLUBS, Card.Value.ACE));
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.ACE));
 		
-		System.out.println(compare(hand_one, hand_two));	
+		System.out.println("Winner: " + compare(hand_one, hand_two));	
 	}
 	
 	/**
