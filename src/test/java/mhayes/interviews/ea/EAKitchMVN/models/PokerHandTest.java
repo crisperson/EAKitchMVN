@@ -5,7 +5,6 @@ import static org.hamcrest.CoreMatchers.*;
 
 import java.util.ArrayList;
 
-import mhayes.interviews.ea.EAKitchMVN.exceptions.InvalidPokerHandException;
 import mhayes.interviews.ea.EAKitchMVN.models.Card.Suit;
 import mhayes.interviews.ea.EAKitchMVN.models.Card.Value;
 import mhayes.interviews.ea.EAKitchMVN.models.PokerHand.HandValue;
@@ -16,14 +15,26 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+/**
+ * The Class PokerHandTest.
+ */
 public class PokerHandTest {
 
+  /** The potential exception to catch. */
   @Rule
   public ExpectedException exception = ExpectedException.none();
   
+	/** The first hand. */
 	PokerHand firstHand;
+	
+	/** The second hand. */
 	PokerHand secondHand;
 	
+	/**
+	 * Setup method, initialize a couple poker hands to potentially use.
+	 *
+	 * @throws Exception the exception
+	 */
 	@Before
 	public void setUp() throws Exception {
 		firstHand = new PokerHand();
@@ -35,12 +46,20 @@ public class PokerHandTest {
 		}
 	}
 
+	/**
+	 * Tear down.
+	 *
+	 * @throws Exception the exception
+	 */
 	@After
 	public void tearDown() throws Exception {
 		firstHand = new PokerHand();
 		secondHand = new PokerHand();
 	}
 
+	/**
+	 * Test empty constructor.
+	 */
 	@Test
 	public void testEmptyConstructor() 
 	{
@@ -50,6 +69,9 @@ public class PokerHandTest {
 		assertEquals(testHand.getHand().size(), 0);
 	}
 	
+	/**
+	 * Test constructor with int parameter.
+	 */
 	@Test
 	public void testConstructorWithIntParameter()
 	{
@@ -60,6 +82,9 @@ public class PokerHandTest {
 		assertFalse(testHand.isValidHand());
 	}
 	
+	/**
+	 * Test constructor with variable args cards.
+	 */
 	@Test
 	public void testConstructorWithVariableArgsCards()
 	{
@@ -76,6 +101,9 @@ public class PokerHandTest {
 		
 	}
 	
+	/**
+	 * Test constructor with array list arg.
+	 */
 	@Test
 	public void testConstructorWithArrayListArg()
 	{
@@ -102,6 +130,10 @@ public class PokerHandTest {
 		assertEquals(testHand.getHand().size(), 3);
 	}
 	
+	/**
+	 * Test sort and evaluate method. checking for the branch where we have an invalid hand making it to the
+	 * sortAndEvaluate method
+	 */
 	@Test
 	public void testSortAndEvaluate()
 	{
@@ -119,6 +151,9 @@ public class PokerHandTest {
 		
 	}
 	
+	/**
+	 * Test sort hand method. Checking that an unsorted hand becomes sorted once passing through the sort method.
+	 */
 	@Test
 	public void testSortHand() {
 		
@@ -154,6 +189,10 @@ public class PokerHandTest {
 	
 	/* Testing the EvaluateHand() method */
 	
+	/**
+	 * Test is royal flush. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the royal flush.
+	 */
 	@Test
 	public void testIsRoyalFlush()
 	{
@@ -178,6 +217,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.ROYAL_FLUSH));
 	}
 	
+	/**
+	 * Test is straight flush. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the straight flush.
+	 */
 	@Test
 	public void testIsStraightFlush()
 	{
@@ -217,6 +260,10 @@ public class PokerHandTest {
 		assertEquals(hand_one.get_handValue(), HandValue.STRAIGHT_FLUSH);
 	}
 	
+	/**
+	 * Test is four of a kind. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the four of a kind.
+	 */
 	@Test
 	public void testIsFourOfAKind()
 	{
@@ -254,6 +301,10 @@ public class PokerHandTest {
 		assertEquals(hand_one.get_handValue(), HandValue.FOUR_OF_A_KIND);
 	}
 	
+	/**
+	 * Test is straight. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the straight.
+	 */
 	@Test
 	public void testIsStraight()
 	{
@@ -324,6 +375,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.STRAIGHT));
 	}
 
+	/**
+	 * Test is flush. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the flush.
+	 */
 	@Test
 	public void testIsFlush()
 	{
@@ -373,6 +428,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.FLUSH));
 	}
 	
+	/**
+	 * Test is full house. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the full house.
+	 */
 	@Test
 	public void testIsFullHouse()
 	{
@@ -411,6 +470,10 @@ public class PokerHandTest {
 		assertEquals(hand_one.get_handValue(), (HandValue.FULL_HOUSE));			
 	}
 	
+	/**
+	 * Test is triples. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the three of a kind.
+	 */
 	@Test 
 	public void testIsTriples()
 	{
@@ -437,6 +500,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.THREE_OF_A_KIND));		
 	}
 	
+	/**
+	 * Test is two pair. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the two pair.
+	 */
 	@Test
 	public void testIsTwoPair()
 	{
@@ -474,6 +541,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.TWO_PAIR));	
 	}
 	
+	/**
+	 * Test is pair. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the pair.
+	 */
 	@Test 
 	public void testIsPair()
 	{
@@ -512,6 +583,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.PAIR));	
 	}
 	
+	/**
+	 * Test is high card. Sanity checking that when we evaluate the hand, we can see that the HandValue variable is set
+	 * to the high card.
+	 */
 	@Test
 	public void testIsHighCard()
 	{
@@ -647,6 +722,10 @@ public class PokerHandTest {
 		assertThat(hand_one.get_handValue(), not(HandValue.HIGH_CARD));
 	}
 
+	/**
+	 * Test valid poker hand. Making sure that invalid poker hands are not included. Most importantly, this includes hands
+	 * which have identical cards in them (impossible in the assumed 52 card standard deck).
+	 */
 	@Test
 	public void testValidPokerHand()
 	{
@@ -678,7 +757,12 @@ public class PokerHandTest {
 	}
 
 	//Evaluating the compareTo method
+	//Essentially comparing all the win conditions for each hand
+	//This implicitly also compares all the loss conditions as well.
 
+	/**
+	 * Test royal flush win. make sure we win against everything else; and tie against an equivalent royal flush
+	 */
 	@Test
 	public void testRoyalFlushWin()
 	{
@@ -826,6 +910,10 @@ public class PokerHandTest {
 
 	}
 
+	/**
+	 * Test straight flush win. make sure we win against everything except a royal flush. and that we tie an identical
+	 * straight flush. also that we lose to a better straight flush, and win vs a lesser straight flush.
+	 */
 	@Test
 	public void testStraightFlushWin()
 	{
@@ -989,6 +1077,10 @@ public class PokerHandTest {
 
 	}
 
+	/**
+	 * Test four of a kind win. make sure we win against everything except a royal flush and straight flush. and that we tie an identical
+	 * four of a kind (impossible). also that we lose to a better four of a kind, and win vs a lesser four of a kind.
+	 */
 	@Test
 	public void testFourOfAKindWin() 
 	{
@@ -999,7 +1091,6 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.SPADES, Card.Value.JACK));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.EIGHT));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.FOUR_OF_A_KIND);
 
 		//four of a kind beats everything but a royal flush and straight flush, so check all those
@@ -1017,7 +1108,6 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.FOUR_OF_A_KIND);
 		assertEquals(hand_one.compareTo(hand_two), 0);
 		
-		//next check that it beats a worse straight flush
 		hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.JACK));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.JACK));
@@ -1026,7 +1116,6 @@ public class PokerHandTest {
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.SIX));
 		hand_two.sortAndEvaluate();
 		
-		//win vs inferior straight flush
 		int result = hand_one.compareTo(hand_two);
 		assertTrue(result>1);
 		assertEquals(hand_two.get_handValue(), HandValue.FOUR_OF_A_KIND);
@@ -1039,7 +1128,6 @@ public class PokerHandTest {
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.ACE));
 		hand_two.sortAndEvaluate();
 		
-		//loss vs better straight flush
 		result = hand_one.compareTo(hand_two);
 		assertTrue(result<=-1);
 		assertEquals(hand_two.get_handValue(), HandValue.FOUR_OF_A_KIND);
@@ -1138,6 +1226,11 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 
+	/**
+	 * Test full house win. check that we win against everything except a royal flush, straight flush, and four of a kind.
+	 * also check that we tie against an equivalent full house; beat a lesser full house by the triples, beat a lesser full
+	 * house by the doubles; lose to a better full house by the triples; and lose to a better full house by the doubles.
+	 */
 	@Test
 	public void testFullHouseWin() 
 	{
@@ -1148,12 +1241,8 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.SPADES, Card.Value.EIGHT));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.EIGHT));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.FULL_HOUSE);
 
-		//four of a kind beats everything but a royal flush and straight flush, so check all those
-		//since we have already checked the loss condition above.
-		//first check that it ties to another identical four of a kind
 		PokerHand hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.JACK));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.JACK));
@@ -1166,7 +1255,6 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.FULL_HOUSE);
 		assertEquals(hand_one.compareTo(hand_two), 0);
 		
-		//next check that it beats a worse straight flush
 		hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.JACK));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.JACK));
@@ -1175,7 +1263,6 @@ public class PokerHandTest {
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.SIX));
 		hand_two.sortAndEvaluate();
 		
-		//win vs inferior straight flush (by the pair)
 		int result = hand_one.compareTo(hand_two);
 		assertTrue(result>1);
 		assertEquals(hand_two.get_handValue(), HandValue.FULL_HOUSE);
@@ -1188,7 +1275,6 @@ public class PokerHandTest {
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.ACE));
 		hand_two.sortAndEvaluate();
 		
-		//loss vs better straight flush (by the pair)
 		result = hand_one.compareTo(hand_two);
 		assertTrue(result<=-1);
 		assertEquals(hand_two.get_handValue(), HandValue.FULL_HOUSE);
@@ -1201,7 +1287,6 @@ public class PokerHandTest {
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.ACE));
 		hand_two.sortAndEvaluate();
 		
-		//loss vs better straight flush (by the triplet)
 		result = hand_one.compareTo(hand_two);
 		assertTrue(result<=-1);
 		assertEquals(hand_two.get_handValue(), HandValue.FULL_HOUSE);
@@ -1214,13 +1299,9 @@ public class PokerHandTest {
 		hand_two.add(new Card(Card.Suit.SPADES, Card.Value.FIVE));
 		hand_two.sortAndEvaluate();
 		
-		//win vs lesser straight flush (by the triplet)
 		result = hand_one.compareTo(hand_two);
 		assertTrue(result>1);
 		assertEquals(hand_two.get_handValue(), HandValue.FULL_HOUSE);	
-		
-		
-		
 		
 		hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.SEVEN));
@@ -1302,6 +1383,11 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test flush win. test that we win against everything except a royal flush, straight flush, four of a kind, and full house.
+	 * also check that we beat a lesser flush (lesser high value), lose to a better flush (better high value), and tie an equivalent
+	 * flush but in a different suit.
+	 */
 	@Test
 	public void testFlushWin() 
 	{
@@ -1312,7 +1398,6 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.THREE));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.EIGHT));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.FLUSH);
 
 		//flush beats everything but a royal flush, straight flush, four of a kind, and full house, so check all those
@@ -1424,6 +1509,11 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test straight win. test that we win only against the three of a kind, two pair, pair, and high card. also test that we
+	 * tie an equivalent straight, i.e. same high card. we lose to a better straight, better high card. and win vs a lesser
+	 * straight, i.e. worse high card.
+	 */
 	@Test
 	public void testStraightWin() 
 	{
@@ -1434,12 +1524,10 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.CLUBS, Card.Value.FOUR));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.SIX));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.STRAIGHT);
 
 		//straight beats everything but a flush, royal flush, straight flush, four of a kind, and full house, so check all those
 		//since we have already checked the loss condition above.
-		//first check that it ties to another identical flush
 		PokerHand hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.THREE));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.FIVE));
@@ -1533,6 +1621,12 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test three of a kind win. check that we only beat a two pair, single pair, and high card. also check that we tie equivalent
+	 * triples (impossible, but checked for sanity). check we beat a worse triple, check we beat a better triple. also check we 
+	 * lose to a better triple by the high card, or a better triple by the second highest card. also check we beat a lesser
+	 * triple by the high card, or beat a lesser triple by the second highest card.
+	 */
 	@Test
 	public void testThreeOfAKindWin() 
 	{
@@ -1543,12 +1637,8 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.CLUBS, Card.Value.THREE));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.SIX));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.THREE_OF_A_KIND);
 
-		//straight beats everything but a flush, royal flush, straight flush, four of a kind, and full house, so check all those
-		//since we have already checked the loss condition above.
-		//first check that it ties to another identical flush
 		PokerHand hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.THREE));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.THREE));
@@ -1684,6 +1774,13 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test two pair win. check that we only beat a pair and a high card. check that we tie an equivalent two pair, with the same
+	 * pair and high card. check we lose against a two pair with a better high card. check that we win against a two pair with a
+	 * worse high card. check we lose against a two pair with a better high pair. check we lose against a two pair with the same
+	 * high pair but better low pair. equivalently check that we beat a two pair that has a lesser high pair, or that we beat
+	 * a two pair that has a lesser low pair but equivalent high pair.
+	 */
 	@Test
 	public void testTwoPairWin() 
 	{
@@ -1694,10 +1791,8 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.CLUBS, Card.Value.JACK));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.SIX));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.TWO_PAIR);
 
-		//first check that it ties to another identical two pair
 		PokerHand hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.THREE));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.THREE));
@@ -1816,6 +1911,13 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test single pair win. check that we only beat a high card. check that we tie an equivalent pair. check that we beat a pair
+	 * of lesser value. check that we lose to a pair of higher value. check that we beat a pair that has a worse high card, or
+	 * equivalent high card and worse second card, or equivalent highest and second highest but worst third highest card. also
+	 * check that we lose to the opposite conditions: a pair that has a better high card, or better second card and same high card,
+	 * or better third card and same first and second high card.
+	 */
 	@Test
 	public void testSinglePairWin() 
 	{
@@ -1826,10 +1928,8 @@ public class PokerHandTest {
 		hand_one.add(new Card(Card.Suit.CLUBS, Card.Value.JACK));
 		hand_one.add(new Card(Card.Suit.DIAMONDS, Card.Value.SIX));
 		hand_one.sortAndEvaluate();
-		//make sure we have a straight flush
 		assertEquals(hand_one.get_handValue(), HandValue.PAIR);
 
-		//first check that it ties to another identical two pair
 		PokerHand hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.FOUR));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.FOUR));
@@ -1962,6 +2062,12 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test high card win. only need to check if we beat other high cards. check that we tie identical hands. check that we lose to
+	 * a better high card, or better second card with same high card, or better third card with same first and second, and so on.
+	 * also check we win in the opposite conditions: i.e. we have a better high card, or we have a better second card but same 
+	 * high card, and so on.
+	 */
 	@Test
 	public void testHighCardWin() 
 	{
@@ -1975,7 +2081,6 @@ public class PokerHandTest {
 		//make sure we have a high card
 		assertEquals(hand_one.get_handValue(), HandValue.HIGH_CARD);
 
-		//first check that it ties to another identical two pair
 		PokerHand hand_two = new PokerHand();
 		hand_two.add(new Card(Card.Suit.DIAMONDS, Card.Value.THREE));
 		hand_two.add(new Card(Card.Suit.HEARTS, Card.Value.FIVE));
@@ -2120,6 +2225,9 @@ public class PokerHandTest {
 		assertEquals(hand_two.get_handValue(), HandValue.HIGH_CARD);
 	}
 	
+	/**
+	 * Test add. Check that we can only add up to the standard hand limit constant.
+	 */
 	@Test
 	public void testAdd()
 	{
