@@ -1,0 +1,4 @@
+-------------------------------------------------------------------------------
+Test set: mhayes.interviews.ea.EAKitchMVN.models.CardTest
+-------------------------------------------------------------------------------
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 sec
